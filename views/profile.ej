@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body class="body" onload="" >
+
+    <form action="/createexpense" method="POST">
+        <input type="text" placeholder="Expense Name" name="expensename">
+        <input type="submit" value="Create">
+    </form>
+    <br>
+    <a href="/logout">Logout</a>
+    <br><br>
+
+
+
+    <form action="">
+
+    </form>
+    <% user.forEach(function(val){%>
+        <a href="/profile/<%=val._id %>" onclick="selectexpense(`<%= val._id %>`)" class="radio" type="radio" name="expense" title="kkkk"
+        value="<%= val.expensename %>"><%= val.expensename %></a>
+    <!-- <a href="/profile/Jaunpur"><input id="<%= val.expensename %>" class="radio" type="radio" name="expense" title="kkkk"
+            value="<%= val.expensename %>" onclick="selectexpense(value)">
+        <label for="<%= val.expensename %>"><%= val.expensename %></label></a> -->
+    <% }) %>
+
+
+
+    <!-- <a href="/createexpense"><button>Click</button> </a> -->
+
+
+    <!-- <h2>Add user now</h2>
+    <form method="POST" action="/adduser" id="myForm">
+
+        <input type="text" id="expensename" name="expensename" id="" placeholder="expensename">
+        <input type="text" id="username" name="username" placeholder="usrname">
+        <input type="password" id="password" name="password" placeholder="password">
+        <input type="submit">
+    </form> -->
+    <br><br>
+
+    <h3 id="text">Test Text</h3>
+
+
+
+    <script>
+    function selectexpense(val) {
+        localStorage.setItem("expense", val);
+}
+
+function myfunction(){
+    if(localStorage.getItem("expense")!= null){
+        location.replace(`http://localhost:3000/profile/${localStorage.getItem("expense")}`);
+    }
+}
+    </script>
+
+</body>
+
+</html>

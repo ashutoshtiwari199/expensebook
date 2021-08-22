@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <h1>userprofile</h1>
+    <a class="btn" href="/logout">logout</a>
+    <br>
+    
+    <% expensename.forEach(function(val){ %>
+        <a href="/userprofile/<%=val %>" class="radio" name="expense" title="kkkk"
+        value="<%= val %>"><%= val %></a>
+        <!-- <a href="/profile/Jaunpur"><input id="<%= val.expensename %>" class="radio" type="radio" name="expense" title="kkkk"
+            value="<%= val.expensename %>" onclick="selectexpense(value)">
+        <label for="<%= val.expensename %>"><%= val.expensename %></label></a> -->
+        <% }) %>
+
+    <form action="addtransaction" method="POST">
+        <!-- <input type="text" name="name" placeholder="spent by"> -->
+        <input id="dd" type="hidden" name="localstorage">
+        <input type="text" name="goodsname" placeholder="GoodsName">
+        <input type="number" name="amount" placeholder="₹ ">
+        <input type="submit">
+    </form>
+
+
+    <h3><%= total %></h3>
+    <h3><%= personalexp %></h3>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Goods Name</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <p><%= goods%></p>
+            <% goods.forEach(function(val){ %>
+            <tr>
+                <td><%= val.spentby %></td>
+                <td><%= val.goods %></td>
+                <td>₹ <%= (val.amount) %> </td>
+                <% if(val.spentby===currentuser){ %>
+                    <td><a href="/delete/<%= val.txnId%>">Delete</a></td>
+                <% } %>
+                
+            </tr>
+            <% }) %>
+            <form action="dte" method="POST">
+                <input name="ele" type="text">
+                <input type="submit">
+            </form>
+        </tbody>
+    </table>
+    <!-- <p></p> -->
+
+
+
+
+
+
+</body>
+
+</html>

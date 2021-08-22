@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+
+    <input type="text" id="user" value="Ashu">
+    <p id="epoch"></p>
+    <p id="datetime"></p>
+
+    <script>
+
+        function tick() {
+
+            /* Get date in epoch */
+            var epoch = Date.now();
+            document.querySelector("#epoch").innerHTML = epoch;
+
+            /* Separate epoch */
+            var datetime = new Date(epoch);
+
+            var year = datetime.getFullYear();
+            var month = datetime.getMonth() + 1; // (0-11)
+            var date = datetime.getDate();
+            var hour = datetime.getHours();
+            var minute = datetime.getMinutes();
+            var second = datetime.getSeconds();
+
+            // document.querySelector("#datetime").innerHTML =
+            //     year + "-" + addZero(month) + "-" + addZero(date) + " " +
+            //     addZero(hour) + ":" + addZero(minute) + ":" + addZero(second);
+                document.querySelector("#datetime").innerHTML =
+                hour + ":" + minute + ":" + second;
+
+        }
+
+        // Add 0 if argument < 10
+        function addZero(i) {
+            if (i < 10) {
+                i = "0" + i
+            };
+            return i;
+        }
+
+        /* Call tick in interval 1 second */
+        setInterval(tick, 1000);
+
+
+        // var username = document.querySelector('#user')
+        // // console.log(user)
+        // username.addEventListener('input', async ()=> {
+        //     console.log(username.value)
+        //     var detail = await fetch(`http://localhost:3000/checkuser/${username.value}`)
+        //     var data1 = await detail.json()
+        //     console.log(data1)
+        // })
+    </script>
+</body>
+
+</html>

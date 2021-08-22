@@ -1,0 +1,129 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title>User's Page</title>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">ExpenseBook</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <!-- <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+              </li> -->
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">ExpenseName</a>
+                <ul class="dropdown-menu">
+                <% user.forEach(function(val){%>
+                  <li><a href="/profile/<%=val._id %>" onclick="selectexpense(`<%= val._id %>`)" class="radio dropdown-item" type="radio" name="expense" title="kkkk"
+                  value="<%= val.expensename %>"><%= val.expensename %></a></li>
+              <% }) %>
+                  <!-- <li><a class="dropdown-item" href="#">NameOne</a></li>
+                  <li><a class="dropdown-item" href="#">NameTwo</a></li>
+                  <li><a class="dropdown-item" href="#">NameThree</a></li> -->
+                </ul>
+              </li>
+            
+              <li class="nav-item">
+                <a class="nav-link " href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+              </li>
+              <li class="nav-item">
+                <form class="d-flex">
+                  <input class="form-control me-2 " type="search" placeholder="Add Member..." aria-label="Search">
+                  <button class="btn btn-outline-success btn-sm" type="submit">+</button>
+                </form>
+              </li>
+            </ul>
+            <form action="createexpense" method="POST" class="d-flex">
+                <input class="form-control me-2 " name="expensename" type="search" placeholder="Create New Expense..." aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Craete</button>
+              </form>
+              <a href="/logout"><button class="btn m-lg-1 btn-outline-success" type="submit"><%= username%>,Logout</button></a>
+          </div>
+        </div>
+      </nav> 
+      <table class="table">
+        <!-- <thead>
+          <tr>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+          </tr>
+        </thead> -->
+        <tbody>
+          <tr>
+            <td>Otto</td>
+            <td>@mdo</td>
+            <td>@mdo</td>
+            <td>@mdo</td>
+          </tr>
+         
+        </tbody>
+      </table>
+      <table class=" mt-5 table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">#</th>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+            <th scope="col">Handle</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th scope="row">1</th>
+            <td>Mark</td>
+            <td>Otto</td>
+            <td>@mdo</td>
+          </tr>
+          <tr>
+            <th scope="row">2</th>
+            <td>Jacob</td>
+            <td>Thornton</td>
+            <td>@fat</td>
+          </tr>
+          <tr>
+            <th scope="row">3</th>
+            <td colspan="2">Larry the Bird</td>
+            
+            <td><i class="fa fa-trash-alt"></i></td>
+          </tr>
+        </tbody>
+      </table>
+      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+      <script src="./scrip.js"></script>
+
+      <script>
+
+
+        // document.querySelector('.dd').value = localStorage.getItem("expense")
+        
+        
+        function selectexpense(val) {
+            localStorage.setItem("expense", val);
+            console.log("from Localstorage  " + localStorage.getItem("expense"))
+        }
+        
+        function myfunction(){
+            if(localStorage.getItem("expense")!= null){
+                location.replace(`http://localhost:3000/profile/${localStorage.getItem("expense")}`);
+            }
+        }
+        
+            </script>
+        
+
+</body>
+</html>

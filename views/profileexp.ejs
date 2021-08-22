@@ -1,0 +1,149 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
+    <!-- <link rel="stylesheet" href="style.css"> -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
+    <title><%= currentuser, %> Page</title>
+</head>
+<body>
+    <nav  class="navbar navbar-expand-lg navbar-light bg-light">
+        <div class="container-fluid">
+          <a class="navbar-brand" href="#">ExpenseBook</a>
+          <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+          </button>
+          <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+              <li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="#">Home</a>
+              </li>
+              <!-- <li class="nav-item">
+                <a class="nav-link" href="#">Link</a>
+              </li> -->
+              <li class="nav-item dropdown">
+                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">ExpenseName</a>
+                <ul class="dropdown-menu">
+                  <% expensename.forEach(function(val){%>
+                    <li><a href="/profile/<%=val._id %>" onclick="selectexpense(`<%= val._id %>`)" class="radio dropdown-item" type="radio" name="expense" title="kkkk"
+                    value="<%= val.expensename %>"><%= val.expensename %>
+                    <% if(isAdmin===true){ %>
+                    <span class="badge bg-secondary h6">Admin</span></a>
+                    <% } %>
+                  </li>
+                <% }) %>
+  
+                  <!-- <li><a class="dropdown-item" href="#">NameOne</a></li>
+                  <li><a class="dropdown-item" href="#">NameTwo</a></li>
+                  <li><a class="dropdown-item" href="#">NameThree</a></li> -->
+                </ul>
+              </li>
+            
+              <li class="nav-item">
+                <a class="nav-link " href="#" tabindex="-1" aria-disabled="true"><%= currentselectedexpense %></a>
+              </li>
+              <li class="nav-item">
+                <!-- **********This function is generating error in saving the object in localstorage because 
+            add event listener will applicable on null if not a admin -->
+                <input type="hidden" class="username" placeholder="this is jugaad for below function" >
+                <%# if(isAdmin===true){ %>
+                <form action="/adduser" method="POST" id="myForm" class="d-flex">
+                    <input class="dd" type="hidden" name="localstorage">
+                  <input class="form-control me-2 " id="username" class="username" name="username" type="search" placeholder="Add Member..." aria-label="Search">
+                  <button class="btn btn-outline-success btn-sm" type="submit">+</button>
+                </form>
+                <%# } %>
+              </li>
+            </ul>
+            <form action="/createexpense" method="POST" class="d-flex">
+                <input class="form-control me-2 " name="expensename" type="search" placeholder="Create New Expense..." aria-label="Search">
+                <button class="btn btn-outline-success" type="submit">Craete</button>
+              </form>
+              <a href="/logout"><button class="btn m-lg-1 btn-outline-success" type="submit"><%= currentuser%>,Logout</button></a>
+          </div>
+        </div>
+      </nav> 
+      <table class="table">
+        <!-- <thead>
+          <tr>
+            <th scope="col">First</th>
+            <th scope="col">Last</th>
+          </tr>
+        </thead> -->
+        <tbody>
+          <tr>
+            <td>Total expense:- <%= total %></td>
+            <td>MyContribution:- <%= personalexp %></td>
+          </tr>
+         
+        </tbody>
+      </table>
+      
+      
+      <form class="ml-2 " action="/addtransaction" method="POST">
+        <input id="dd" class="dd" type="hidden"  name="localstorage">
+        <input type="text" name="goodsname" placeholder="GoodsName">
+        <input type="number" name="amount" placeholder="₹ ">
+        <input type="submit">
+      </form>
+  
+      <table class=" mt-5 table table-striped">
+        <thead>
+          <tr>
+            <th scope="col">Date</th>
+            <th scope="col">Name</th>
+            <th scope="col">GoodsName</th>
+            <th scope="col">Amount</th>
+            <th scope="col">Modify</th>
+          </tr>
+        </thead>
+        <tbody>
+        <% goods.forEach(function(val){ %>
+          <tr>
+            <!-- <th scope="row"><% %></th> -->
+            <td><%= val.date %></td>
+            <td><%= val.spentby %></td>
+            <td><%= val.goods %></td>
+            <td>₹ <%= (val.amount) %></td>
+            <% if(val.spentby===currentuser){ %>
+                <td><a href="/delete/<%= val.txnId%>/<%= expenseid._id%>"><i class="fa fa-trash-alt"></i></a></td>
+                <!-- <td><a href="/delete/<%# val.txnId%>">Delete</a></td> -->
+            <% } else {%>
+              <td><i class="fa fa-check-double"></i></td>
+            <% } %>
+          </tr>
+          <% }) %>
+        </tbody>
+      </table>
+
+      <script>
+
+
+        // document.querySelector('.dd').value = localStorage.getItem("expense")
+        document.querySelector('.dd').value = localStorage.getItem("expense")
+        document.querySelector('#dd').value = localStorage.getItem("expense")
+
+        
+        function selectexpense(val) {
+          document.querySelector('.dd').value = val; 
+            localStorage.setItem("expense", val);
+            // document.querySelector('.dd').value = localStorage.getItem("expense")
+            console.log("from Localstorage  " + localStorage.getItem("expense"))
+
+            // window.preventDefault()
+        }
+        
+        function myfunction(){
+            if(localStorage.getItem("expense")!= null){
+                location.replace(`http://localhost:3000/profile/${localStorage.getItem("expense")}`);
+            }
+        }
+            </script>
+            <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+
+
+</body>
+</html>

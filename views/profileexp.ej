@@ -1,0 +1,217 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body class="body">
+
+    <form action="/createexpense" method="POST">
+        <input type="text" placeholder="Expense Name" name="expensename">
+        <input type="submit" value="Create">
+    </form>
+    <br>
+    <a href="/logout">Logout</a>
+    <br><br>
+
+
+    <% expensename.forEach(function(val){ %>
+    <a style="margin: 5px;" href="/profile/<%=val._id %>" class="radio" type="radio" name="expense" title="kkkk"
+        value="<%= val.expensename %>"
+        onclick="selectexpense(`<%= val._id %>`)"><%= val.expensename %><small></small></a>
+    <!-- <a href="/profile/Jaunpur"><input id="<%= val.expensename %>" class="radio" type="radio" name="expense" title="kkkk"
+            value="<%= val.expensename %>" onclick="selectexpense(value)">
+        <label for="<%= val.expensename %>"><%= val.expensename %></label></a> -->
+    <% }) %>
+
+
+
+    <!-- **********This function is generating error in saving the object in localstorage because 
+            add event listener will applicable on null if not a admin -->
+            <input type="hidden" class="username" placeholder="this is jugaad for below function" >
+    <%# if(isAdmin===true){ %>
+    <h2>Add user now</h2>
+    <form method="POST" action="/adduser" id="myForm">
+        <input class="dd" type="hidden" name="localstorage">
+        <!-- <input type="text" id="expensename" name="expensename" id="" placeholder="expensename"> -->
+        <input type="text" id="username" class="username" name="username" placeholder="usrname" value="Ashut">
+        <small id="error" style="color: red;">Msg</small>
+        <!-- <input type="password" id="password" name="password" placeholder="password"> -->
+        <input type="submit">
+    </form>
+    <%# } %>
+    <br><br>
+
+    <h3 id="text">Test Text</h3>
+
+
+
+    <h3><%= total %></h3>
+    <h3><%= personalexp %></h3>
+    <!-- <input type="text" value=`` name="" id=""> -->
+
+    <form action="/addtransaction" method="POST">
+        <input id="dd" class="dd" type="hidden" name="localstorage">
+        <input type="text" name="goodsname" placeholder="GoodsName">
+        <input type="number" name="amount" placeholder="₹ ">
+        <input type="submit">
+    </form>
+    <table>
+        <thead>
+            <tr>
+                <th>Name</th>
+                <th>Goods Name</th>
+                <th>Price</th>
+            </tr>
+        </thead>
+        <tbody>
+            <!-- <p><%= goods%></p> -->
+            <% goods.forEach(function(val){ %>
+            <tr>
+                <td><%= val.spentby %></td>
+                <td><%= val.goods %></td>
+                <td>₹ <%= (val.amount) %> </td>
+                <% if(val.spentby===currentuser){ %>
+                <td><a href="/delete/<%= val.txnId%>/<%= expenseid._id%>">Delete</a></td>
+                <!-- <td><a href="/delete/<%# val.txnId%>">Delete</a></td> -->
+
+                <% } %>
+
+            </tr>
+            <% }) %>
+
+        </tbody>
+    </table>
+
+
+    <%# alluser.forEach(function(val){ %>
+    <h2><%# val.name %></h2>
+    <%#}) %>
+
+    <script src="https://unpkg.com/axios/dist/axios.min.js"></script>
+
+    <script>
+        var dd= "rupiya"
+
+        var username = document.querySelector('#username')
+        // console.log(user.value)
+        username.addEventListener('input', async () => {
+            console.log(username.value)
+            var detail = await fetch(`http://localhost:3000/checkuser/${username.value}/${localStorage.getItem("expense")}`)
+            var data1 = await detail.json()
+            console.log(data1)
+            if (data1 === "User does not found") {
+                console.log("usernotfoundrunning")
+                // document.querySelector('#btn').removeAttribute('disabled');
+                username.style.color = 'red';
+                document.querySelector('#error').textContent = ("user not available!! Invite user now with email ")
+                // document.getElementById("buttonsubmit").setAttribute("disabled","true")
+            } else if("User already exist in this expense"){
+                // document.querySelector('#btn').setAttribute('disabled', 'true');
+                username.style.color = 'green';
+                // document.getElementById("buttonsubmit").setAttribute("disabled","true")
+                document.querySelector('#error').textContent = ("User already exist in this expense")
+            } else if(data === Object){
+                username.style.color = 'yellow';
+                // document.getElementById("buttonsubmit").setAttribute("disabled","false")
+                document.querySelector('#error').textContent = "Add this user now"
+            }
+
+        })
+
+
+        // const myForm = document.querySelectorAll('#myForm');
+        // myForm.addEventListenner('submit', function (e) {
+        //     // e.preventDefault();
+        //     const formData = new FormData(this);
+        //     fetch(`http://localhost:3000/adduser`, {
+        //         method: 'post',
+        //         body: formData
+        //     }).then(res => {
+        //         return res.text();
+        //     }).then(text => {
+        //         console.log(text)
+        //     })
+        // })
+
+
+        document.querySelector('.dd').value = localStorage.getItem("expense")
+        document.querySelector('#dd').value = localStorage.getItem("expense")
+        alert(document.querySelector('#dd').value)
+
+        function selectexpense(val) {
+
+            // const dd = document.querySelector('#dd').value
+            localStorage.setItem("expense", val);
+            // localStorage.setItem("name", "Ashutosh");
+            // document.querySelector('#dd').value = localStorage.getItem("expense")
+
+            console.log("from Localstorage  " + localStorage.getItem("expense"))
+            // document.querySelector('#dd').value = localStorage.getItem("expense")
+
+            // var dd= document.querySelector('#dd')
+            // dd = localStorage.getItem("expense");
+            // console.log("dd value "+dd);
+            // window.location.href = `http://localhost:3000/profile/${expense}`;
+            // fetch(`http://localhost:3000/profile/${expense}`).then((val) => {
+            //     // res.json(val)
+            //     return val.json();
+            // }).then(val1 => {
+            //     console.log(val1.expensefound.expenseamount)
+            //     if ((val1.expensefound.expenseamount).length != 0) {
+            //         for (var i = 0; i < 2; i++) {
+            //             document.getElementById('spentby').innerText = val1.expensefound.expenseamount[i].spentby 
+            //             document.getElementById('goods').innerText = val1.expensefound.expenseamount[i].goods
+            //             document.getElementById('amount').innerText = val1.expensefound.expenseamount[i].amount
+            //             // event.preventDefault();
+            //             return val1.json()
+            //         }
+            //     }
+            //     else {
+            //         document.getElementById('inner').innerHTML= " "
+            //     }
+            //     // body.innerHTML += 
+
+            // })
+        }
+
+        // ************Check user name function
+
+
+
+
+
+        // username.addEventListener('input', function () {
+        //     var changed = changetounderscore(username.value);
+        //     username.value = changed;
+        //     if (changed.trim().length !== 0) {
+        //         axios.get(`http://localhost:3000/checkuser/${"sh"}`)
+        //             .then(function (founduser) {
+        //                 console.log(found)
+        //                 if (founduser.data === null) {
+        //                     document.querySelector('#btn').removeAttribute('disabled');
+        //                     username.style.color = 'black';
+        //                     document.querySelector('#error').textContent = ("")
+        //                 } else {
+        //                     document.querySelector('#btn').setAttribute('disabled', 'true');
+        //                     username.style.color = 'red';
+        //                     document.querySelector('#error').textContent = ("Username taken")
+        //                 }
+
+        //             })
+        //     } else {
+        //         document.querySelector('#btn').removeAttribute('disabled');
+        //         username.style.color = 'black';
+        //         document.querySelector('#error').textContent = ("")
+        //     }
+        // })
+
+
+    </script>
+
+</body>
+
+</html>
