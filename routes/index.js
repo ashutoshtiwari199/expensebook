@@ -20,8 +20,8 @@ passport.use(new localStrategy(User.authenticate()));
 /* GET home page. */
 router.get('/', function (req, res, next) {
   // console.log(uuidv4())
-  console.log(GetFormattedDate())
-  console.log(GetFormattedTime())
+  // console.log(GetFormattedDate())
+  // console.log(GetFormattedTime())
   res.render('index', { title: 'Express' });
   // console.log(uniqid(),uniqid.time(),uniqid.process())
 });
@@ -92,27 +92,29 @@ router.post('/adduser', isLoggedIn, function (req, res) {
 
 // *************Check user is availaible or not
 router.get('/checkuser/:username/:localstorage', function (req, res) {
-  console.log(".............." + req.params.localstorage)
-  Expense.findOne({ _id: req.params.localstorage }).then(found => {
-    User.findOne({ username: req.params.username })
-      .then(function (userfound) {
-        // console.log(founduser);
-        // if( true && true){
-        if (!userfound) {
-          res.status(404).json("User does not found")
-        } else if (userfound !== null && (found.otheruser.includes(userfound._id))) {
-          res.json("User already exist in this expense")
-        } else {
-          res.json(userfound)
-        }
-        // if (userfound!==null && (found.otheruser.includes(userfound._id))) {
-        //   console.log("============>>>" + found.otheruser.includes(userfound._id))
-        // } else {
-        //   console.log("no")
-        // }
-        // res.json(userfound)
-      })
+  console.log(`"user ${req.params.username} local ${req.params.localstorage}`)
+  Expense.findOne({ _id: req.params.localstorage }).populate('otheruser').exec((err, posts) => {
+    console.log("Populated User " + posts);
   })
+    // User.findOne({ username: req.params.username })
+    //   .then(function (userfound) {
+    //     // console.log(founduser);
+    //     // if( true && true){
+    //     if (!userfound) {
+    //       res.status(404).json("User does not found")
+    //     } else if (userfound !== null && (found.otheruser.includes(userfound._id))) {
+    //       res.json("User already exist in this expense")
+    //     } else {
+    //       res.json(userfound)
+    //     }
+    //     // if (userfound!==null && (found.otheruser.includes(userfound._id))) {
+    //     //   console.log("============>>>" + found.otheruser.includes(userfound._id))
+    //     // } else {
+    //     //   console.log("no")
+    //     // }
+    //     // res.json(userfound)
+    //   })
+  // })
 })
 
 
@@ -161,7 +163,7 @@ router.get('/profile', isLoggedIn, function (req, res) {
     Expense.find()
       .then(val => {
         console.log(user.expensename)
-        res.render('profile', { expensename: val, expensefound: null,username:req.session.passport.user, user: user.expensename })
+        res.render('profile', { expensename: val, expensefound: null,username:req.session.passport.user, user: user.expensename, currentuser:user.name })
       })
   })
 })
@@ -177,7 +179,8 @@ router.get('/profile/:expense', isLoggedIn, function (req, res) {
           goods: expensefound.expenseamount,
           expenseid: expensefound,
           currentselectedexpense:expensefound.expensename,
-          isAdmin: isadmin(expensefound.adminname, req.session.passport.user),
+          // isAdmin:true,
+          isAdmin: isadmin(expensefound.adminusername, req.session.passport.user),
           // alluser:founduser,
           expensename: founduser.expensename,
           currentuser: req.session.passport.user,
@@ -198,13 +201,13 @@ router.get('/profile/:expense', isLoggedIn, function (req, res) {
 
 
 // ******delete function
-function arrayRemove(arr, value) {
-  return arr.filter(function (ele) {
-    console.log(ele != value)
-    return ele != value;
-  });
+// function arrayRemove(arr, value) {
+//   return arr.filter(function (ele) {
+//     console.log(ele != value)
+//     return ele != value;
+//   });
 
-}
+// }
 
 
 router.post('/dte', function (req, res) {
@@ -264,7 +267,7 @@ var vill = "Srilanka"
 
 
 router.post('/addtransaction', isLoggedIn, function (req, res) {
-  console.log("hhhhhhhh  " + req.body.localstorage)
+  // console.log("hhhhhhhh  " + req.body.localstorage)
   User.findOne({ username: req.session.passport.user }).then(userfound => {
     Expense.findOne({ _id: req.body.localstorage }).then(expensefound => {
       // console.log("arrrrrray" + expensefound)
@@ -375,6 +378,7 @@ function isadmin(val1, val2) {
   // console.log("val1===" + val1)
   // console.log("val2===" + val2)
   if (val1 === val2) return true
+  else return false;
 }
 
 function GetFormattedDate() {

@@ -19,7 +19,7 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
+                <a class="nav-link active" style="text-transform: capitalize;" aria-current="page" href="#">Hello, <%= currentuser%></a>
               </li>
               <!-- <li class="nav-item">
                 <a class="nav-link" href="#">Link</a>
@@ -28,11 +28,8 @@
                 <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">ExpenseName</a>
                 <ul class="dropdown-menu">
                   <% expensename.forEach(function(val){%>
-                    <li><a href="/profile/<%=val._id %>" onclick="selectexpense(`<%= val._id %>`)" class="radio dropdown-item" type="radio" name="expense" title="kkkk"
-                    value="<%= val.expensename %>"><%= val.expensename %>
-                    <% if(isAdmin===true){ %>
-                    <span class="badge bg-secondary h6">Admin</span></a>
-                    <% } %>
+                    <li><a href="/profile/<%=val._id %>" onclick="selectexpense(`<%= val._id %>`)" class=" dropdown-item" type="" name="expense" title="kkkk"
+                      value="<%= val.expensename %>"><%= val.expensename %></a>
                   </li>
                 <% }) %>
   
@@ -49,20 +46,22 @@
                 <!-- **********This function is generating error in saving the object in localstorage because 
             add event listener will applicable on null if not a admin -->
                 <input type="hidden" class="username" placeholder="this is jugaad for below function" >
-                <%# if(isAdmin===true){ %>
+                <% if(isAdmin===true){ %>
                 <form action="/adduser" method="POST" id="myForm" class="d-flex">
                     <input class="dd" type="hidden" name="localstorage">
                   <input class="form-control me-2 " id="username" class="username" name="username" type="search" placeholder="Add Member..." aria-label="Search">
                   <button class="btn btn-outline-success btn-sm" type="submit">+</button>
                 </form>
-                <%# } %>
+                <% } else{ %>
+                  <h6 style="display: none;"></h6>
+                <% } %>
               </li>
             </ul>
             <form action="/createexpense" method="POST" class="d-flex">
                 <input class="form-control me-2 " name="expensename" type="search" placeholder="Create New Expense..." aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Craete</button>
               </form>
-              <a href="/logout"><button class="btn m-lg-1 btn-outline-success" type="submit"><%= currentuser%>,Logout</button></a>
+              <a href="/logout"><button class="btn m-lg-1 btn-outline-success" type="submit">Logout</button></a>
           </div>
         </div>
       </nav> 
@@ -74,23 +73,24 @@
           </tr>
         </thead> -->
         <tbody>
-          <tr>
+          <tr class="d-flex justify-content-around">
             <td>Total expense:- <%= total %></td>
             <td>MyContribution:- <%= personalexp %></td>
+            <!-- <button onclick="checkuserexist(`narayan`)">Check user exist</button> -->
           </tr>
-         
+          
         </tbody>
       </table>
       
       
-      <form class="ml-2 " action="/addtransaction" method="POST">
+      <form class=""  action="/addtransaction" method="POST">
         <input id="dd" class="dd" type="hidden"  name="localstorage">
-        <input type="text" name="goodsname" placeholder="GoodsName">
-        <input type="number" name="amount" placeholder="₹ ">
-        <input type="submit">
+        <input type="text" min="3" class="m-1" name="goodsname" placeholder="GoodsName...">
+        <input type="number" min="0" class="m-1" name="amount" placeholder="₹ ">
+        <input type="submit" class="m-1">
       </form>
   
-      <table class=" mt-5 table table-striped">
+      <table class="mt-5 table table-striped">
         <thead>
           <tr>
             <th scope="col">Date</th>
@@ -121,7 +121,7 @@
 
       <script>
 
-
+        // var local=localStorage.getItem("expense")
         // document.querySelector('.dd').value = localStorage.getItem("expense")
         document.querySelector('.dd').value = localStorage.getItem("expense")
         document.querySelector('#dd').value = localStorage.getItem("expense")
@@ -141,6 +141,8 @@
                 location.replace(`http://localhost:3000/profile/${localStorage.getItem("expense")}`);
             }
         }
+
+
             </script>
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
 

@@ -19,7 +19,7 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
+                <a class="nav-link active" style="text-transform: capitalize;" aria-current="page" href="#">Hello, <%= currentuser%></a>
               </li>
               <!-- <li class="nav-item">
                 <a class="nav-link" href="#">Link</a>
@@ -27,82 +27,32 @@
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">ExpenseName</a>
                 <ul class="dropdown-menu">
-                <% user.forEach(function(val){%>
-                  <li><a href="/profile/<%=val._id %>" onclick="selectexpense(`<%= val._id %>`)" class="radio dropdown-item" type="radio" name="expense" title="kkkk"
-                  value="<%= val.expensename %>"><%= val.expensename %></a></li>
-              <% }) %>
-                  <!-- <li><a class="dropdown-item" href="#">NameOne</a></li>
-                  <li><a class="dropdown-item" href="#">NameTwo</a></li>
-                  <li><a class="dropdown-item" href="#">NameThree</a></li> -->
+                <% if(user.length!=0){ %>
+                  <% user.forEach(function(val){%>
+                    <li><a href="/profile/<%=val._id %>" onclick="selectexpense(`<%= val._id %>`)" class="radio text-capitalize dropdown-item" type="radio" name="expense" 
+                    value="<%= val.expensename %>"><%= val.expensename %></a></li>
+                <% }) %>  
+                <% } else { %>
+                  <li><label class="dropdown-item" for="create-expense"  href="#">Create Now...</label></li>
+                <% } %>  
+                  <!-- <li><a class="dropdown-item" href="#">NameTwo</a></li>
+                  <li><a class="dropdown-item" href="#">NameThree</a></li> --> 
                 </ul>
               </li>
             
               <li class="nav-item">
-                <a class="nav-link " href="#" tabindex="-1" aria-disabled="true">Disabled</a>
-              </li>
-              <li class="nav-item">
-                <form class="d-flex">
-                  <input class="form-control me-2 " type="search" placeholder="Add Member..." aria-label="Search">
-                  <button class="btn btn-outline-success btn-sm" type="submit">+</button>
-                </form>
               </li>
             </ul>
             <form action="createexpense" method="POST" class="d-flex">
-                <input class="form-control me-2 " name="expensename" type="search" placeholder="Create New Expense..." aria-label="Search">
+                <input class="form-control me-2" id="create-expense" name="expensename" type="search" placeholder="Create New Expense..." aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Craete</button>
               </form>
               <a href="/logout"><button class="btn m-lg-1 btn-outline-success" type="submit"><%= username%>,Logout</button></a>
           </div>
         </div>
       </nav> 
-      <table class="table">
-        <!-- <thead>
-          <tr>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-          </tr>
-        </thead> -->
-        <tbody>
-          <tr>
-            <td>Otto</td>
-            <td>@mdo</td>
-            <td>@mdo</td>
-            <td>@mdo</td>
-          </tr>
-         
-        </tbody>
-      </table>
-      <table class=" mt-5 table table-striped">
-        <thead>
-          <tr>
-            <th scope="col">#</th>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-            <th scope="col">Handle</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr>
-            <th scope="row">1</th>
-            <td>Mark</td>
-            <td>Otto</td>
-            <td>@mdo</td>
-          </tr>
-          <tr>
-            <th scope="row">2</th>
-            <td>Jacob</td>
-            <td>Thornton</td>
-            <td>@fat</td>
-          </tr>
-          <tr>
-            <th scope="row">3</th>
-            <td colspan="2">Larry the Bird</td>
-            
-            <td><i class="fa fa-trash-alt"></i></td>
-          </tr>
-        </tbody>
-      </table>
-      <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
+      <img height="20%" width="20" src="../public/images/indexpic.jpg" alt="picture">
+       <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
       <script src="./scrip.js"></script>
 
       <script>
