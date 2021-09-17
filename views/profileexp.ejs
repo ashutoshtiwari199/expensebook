@@ -5,7 +5,6 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-    <!-- <link rel="stylesheet" href="style.css"> -->
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title><%= currentuser, %> Page</title>
 </head>
@@ -21,9 +20,6 @@
               <li class="nav-item">
                 <a class="nav-link active" style="text-transform: capitalize;" aria-current="page" href="#">Hello, <%= currentuser%></a>
               </li>
-              <!-- <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-              </li> -->
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">ExpenseName</a>
                 <ul class="dropdown-menu">
@@ -33,9 +29,6 @@
                   </li>
                 <% }) %>
   
-                  <!-- <li><a class="dropdown-item" href="#">NameOne</a></li>
-                  <li><a class="dropdown-item" href="#">NameTwo</a></li>
-                  <li><a class="dropdown-item" href="#">NameThree</a></li> -->
                 </ul>
               </li>
             
@@ -59,24 +52,17 @@
             </ul>
             <form action="/createexpense" method="POST" class="d-flex">
                 <input class="form-control me-2 " name="expensename" type="search" placeholder="Create New Expense..." aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Craete</button>
+                <button class="btn btn-outline-success" type="submit">Create</button>
               </form>
               <a href="/logout"><button class="btn m-lg-1 btn-outline-success" type="submit">Logout</button></a>
           </div>
         </div>
       </nav> 
       <table class="table">
-        <!-- <thead>
-          <tr>
-            <th scope="col">First</th>
-            <th scope="col">Last</th>
-          </tr>
-        </thead> -->
         <tbody>
           <tr class="d-flex justify-content-around">
             <td>Total expense:- <%= total %></td>
             <td>MyContribution:- <%= personalexp %></td>
-            <!-- <button onclick="checkuserexist(`narayan`)">Check user exist</button> -->
           </tr>
           
         </tbody>
@@ -103,14 +89,12 @@
         <tbody>
         <% goods.forEach(function(val){ %>
           <tr>
-            <!-- <th scope="row"><% %></th> -->
             <td><%= val.date %></td>
             <td><%= val.spentby %></td>
             <td><%= val.goods %></td>
             <td>₹ <%= (val.amount) %></td>
             <% if(val.spentby===currentuser){ %>
                 <td><a href="/delete/<%= val.txnId%>/<%= expenseid._id%>"><i class="fa fa-trash-alt"></i></a></td>
-                <!-- <td><a href="/delete/<%# val.txnId%>">Delete</a></td> -->
             <% } else {%>
               <td><i class="fa fa-check-double"></i></td>
             <% } %>
@@ -121,8 +105,6 @@
 
       <script>
 
-        // var local=localStorage.getItem("expense")
-        // document.querySelector('.dd').value = localStorage.getItem("expense")
         document.querySelector('.dd').value = localStorage.getItem("expense")
         document.querySelector('#dd').value = localStorage.getItem("expense")
 
@@ -130,10 +112,7 @@
         function selectexpense(val) {
           document.querySelector('.dd').value = val; 
             localStorage.setItem("expense", val);
-            // document.querySelector('.dd').value = localStorage.getItem("expense")
             console.log("from Localstorage  " + localStorage.getItem("expense"))
-
-            // window.preventDefault()
         }
         
         function myfunction(){

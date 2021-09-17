@@ -21,9 +21,6 @@
               <li class="nav-item">
                 <a class="nav-link active" style="text-transform: capitalize;" aria-current="page" href="#">Hello, <%= currentuser%></a>
               </li>
-              <!-- <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-              </li> -->
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">ExpenseName</a>
                 <ul class="dropdown-menu">
@@ -35,8 +32,6 @@
                 <% } else { %>
                   <li><label class="dropdown-item" for="create-expense"  href="#">Create Now...</label></li>
                 <% } %>  
-                  <!-- <li><a class="dropdown-item" href="#">NameTwo</a></li>
-                  <li><a class="dropdown-item" href="#">NameThree</a></li> --> 
                 </ul>
               </li>
             
@@ -57,10 +52,6 @@
 
       <script>
 
-
-        // document.querySelector('.dd').value = localStorage.getItem("expense")
-        
-        
         function selectexpense(val) {
             localStorage.setItem("expense", val);
             console.log("from Localstorage  " + localStorage.getItem("expense"))

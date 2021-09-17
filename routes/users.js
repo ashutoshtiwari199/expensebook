@@ -8,11 +8,7 @@ mongoose.connect('mongodb+srv://ashutosh123:ashutosh123@testdb-ppgjk.mongodb.net
 
 var adminModel= mongoose.Schema({
   username:String,
-  // email:{
-  //   type: String,
-  //   unique: false,
-  //   required:false,
-  // },
+  email: String,
   name:String,
   isadmin:Boolean,
   password:String,

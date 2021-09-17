@@ -7,22 +7,15 @@ const {ObjectId}= mongoose.Schema;
 
 
 var expenseSchema= mongoose.Schema({
-    // username: String,
     expensename:String,
     adminname:String,
     adminusername:String,
     expenseamount:[],
-    // otheruser:[{
-    //     type:ObjectId,
-    //     ref: "User"
-    // }],
-
     otheruser:[{
         type:mongoose.Schema.Types.ObjectId,
         ref: "user"
     }],
     spentby:["username"]
-
     
 })
 

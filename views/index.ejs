@@ -7,8 +7,6 @@
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
-    <link rel="stylesheet" href="style.css">
-    <!-- <script src="./scrip.js"></script> -->
     <title>ExpenseBook</title>
   </head>
   <body class="body" >
@@ -26,17 +24,6 @@
               <li class="nav-item">
                 <a class="nav-link" href="#">Link</a>
               </li>
-              <!-- <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-                  BluggyName
-                </a>
-                <ul class="dropdown-menu" aria-labelledby="navbarDropdown">
-                    <li><a class="dropdown-item" href="#">BluggyOne</a></li>
-                    <li><a class="dropdown-item" href="#">BluggyTwo</a></li>
-                    <li><a class="dropdown-item" href="#">BluggyOne</a></li>
-                    <li><a class="dropdown-item" href="#">BluggyTwo</a></li>
-                  </ul>
-              </li> -->
               <li class="nav-item">
                 <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
               </li>
@@ -46,7 +33,6 @@
       </nav> 
       <!-- Modals to login -->
       <!-- Button trigger modal -->
-    <img style="position : absolute; width: 40%; height: 40%;" src="../images/HumaaansSpace.png" alt="Picture">   
     <button type="button" class="btn btn-primary position-absolute top-50 start-50 translate-middle" data-bs-toggle="modal" data-bs-target="#loginModal">
       Login
     </button>
@@ -132,14 +118,9 @@ const lengtherrmsg= document.getElementById("small-password-err-msg");
 
 
 function validatesamepassword(){
-  // console.log("Onchange worked")
-  // RegisterButton.className += " disabled";
-  // console.log(password.value)
   if(password.value!=confirmpassword.value){
     errmsg.classList.remove("invisible");
-    // alert("matched")
     RegisterButton.classList.add("disabled")
-    console.log("condition called")
   } else{
     errmsg.classList.add("invisible");
     RegisterButton.classList.remove("disabled")
@@ -149,9 +130,7 @@ function validatesamepassword(){
 function passwordlength(){
   if(password.value.length<6){
     lengtherrmsg.classList.remove("invisible")
-    console.log("password must be 6 word")
   } else{
-    console.log("okay")
     lengtherrmsg.classList.add("invisible")
   }
 }
