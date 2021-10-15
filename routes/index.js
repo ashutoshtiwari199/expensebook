@@ -140,6 +140,23 @@ router.get('/delete/:ele/:expId', function (req, res) {
   res.redirect(`/profile/${req.params.expId}`)
 })
 
+// *************update transaction route********************//
+
+router.put('/updatetxn/:txnId/:expenseId',(req,res)=>{
+  const txnId= req.params.txnId;
+  const tobeupdate= req.body;
+  Expense.findOne({_id: req.params.expenseId}).then(expense=>{
+    const expenseArray= expense.expenseamount
+    Expense.updateOne( {_id : req.params.expenseId},
+    {$set : {"expenseamount" : updateTxn(txnId,expenseArray,tobeupdate)} } ,
+    (err,result)=>{
+      if(err) res.json(err);
+      res.redirect(`/profile/${req.params.expenseId}`)
+
+    });
+  })
+})
+
 
 // ***********This add transaction rout**************
 
@@ -255,6 +272,13 @@ function GetFormattedTime() {
     return    hour +":"+ minute + ":" + second;
 }
 
+// ====== update transaction function=======
+
+function updateTxn(txnId,expenseamountarray,objupdt){
+  let index= expenseamountarray.findIndex((obj => obj.txnId == txnId));
+  expenseamountarray[index]= objupdt; 
+  return expenseamountarray;
+}
 
 
 

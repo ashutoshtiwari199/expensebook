@@ -95,13 +95,41 @@
             <td>₹ <%= (val.amount) %></td>
             <% if(val.spentby===currentuser){ %>
                 <td><a href="/delete/<%= val.txnId%>/<%= expenseid._id%>"><i class="fa fa-trash-alt"></i></a></td>
-            <% } else {%>
+                        <% } else {%>
               <td><i class="fa fa-check-double"></i></td>
             <% } %>
           </tr>
           <% }) %>
         </tbody>
       </table>
+
+      <!-- update form modal -->
+
+      <div class="modal fade" id="updatetxn" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog modal-dialog-centered">
+          <div class="modal-content">
+            <div class="modal-header">
+              <h5 class="modal-title" id="exampleModalLabel">Login</h5>
+              <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+              <form action="login" method="POST">
+                <div class="mb-3">
+                  <label for="exampleInputEmail1"  class="form-label">UserName</label>
+                  <input type="text" class="form-control" name="username" id="exampleInputEmail1" aria-describedby="emailHelp">
+                  <div id="emailHelp" class="form-text">We'll share your Everything.</div>
+                </div>
+                <div class="mb-3">
+                  <label for="exampleInputPassword1" class="form-label">Password</label>
+                  <input oninput="passwordlength()" name="password" type="password" class="form-control" id="exampleInputPassword1">
+                </div>
+                <button type="submit" class="btn btn-primary container-fluid">Submit</button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+      
 
       <script>
 
