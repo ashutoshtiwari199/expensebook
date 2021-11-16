@@ -123,6 +123,7 @@ router.get('/profile/:expense', isLoggedIn, function (req, res) {
           personalexp: pesronal_amount(expensefound.expenseamount, req.session.passport.user),
           total: total_amount(expensefound.expenseamount),
           spentby: expensefound.spentby,
+          individualExpense: eliminate_dup(expensefound.expenseamount),
           })
         })
       })
@@ -133,7 +134,7 @@ router.get('/profile/:expense', isLoggedIn, function (req, res) {
 
 router.get('/delete/:ele/:expId', function (req, res) {
   var newvalues = { $pull: { "expenseamount": { "txnId": req.params.ele } } }
-  Expense.update({}, newvalues, { multi: true }, function (err, res) {
+  Expense.updateOne({}, newvalues, { multi: true }, function (err, res) {
     if (err) throw err
     console.log("deleted")
   })
@@ -280,6 +281,20 @@ function updateTxn(txnId,expenseamountarray,objupdt){
   return expenseamountarray;
 }
 
+
+// ------****** function for personnel expense*******
+function eliminate_dup(expo){
+  let exp=JSON.parse(JSON.stringify(expo))
+  for(let i=0; i<exp.length;i++){
+    for(let j=i+1; j<exp.length; j++){
+      if(exp[i].spentby===exp[j].spentby ){
+        exp[i].amount = +(exp[i].amount) + +(exp[j].amount);
+        exp[j]="";  
+      }
+    }
+  }
+  return exp.filter(function (e) {return e != "";})
+}
 
 
 module.exports = router;

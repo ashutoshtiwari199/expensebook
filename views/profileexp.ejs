@@ -62,9 +62,14 @@
         <tbody>
           <tr class="d-flex justify-content-around">
             <td>Total expense:- <%= total %></td>
-            <td>MyContribution:- <%= personalexp %></td>
           </tr>
           
+          <% individualExpense.forEach(value=>{ %>
+            <tr class="d-flex justify-content-around">
+              <td><%= value.spentby %> <%= value.amount%> </td>
+            </tr>
+          <% }) %>
+
         </tbody>
       </table>
       
@@ -87,6 +92,7 @@
           </tr>
         </thead>
         <tbody>
+
         <% goods.forEach(function(val){ %>
           <tr>
             <td><%= val.date %></td>
@@ -135,6 +141,7 @@
 
         document.querySelector('.dd').value = localStorage.getItem("expense")
         document.querySelector('#dd').value = localStorage.getItem("expense")
+        // const obj= document.querySelector('#goods').value;
 
         
         function selectexpense(val) {
@@ -143,11 +150,14 @@
             console.log("from Localstorage  " + localStorage.getItem("expense"))
         }
         
+
+        console.log(arr);
         function myfunction(){
             if(localStorage.getItem("expense")!= null){
                 location.replace(`http://localhost:3000/profile/${localStorage.getItem("expense")}`);
             }
         }
+
 
 
             </script>
