@@ -9,28 +9,28 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>User's Page</title>
 </head>
-<body>
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
-        <div class="container-fluid">
-          <a class="navbar-brand" href="#">ExpenseBook</a>
+<body style="background-color: rgb(208, 200, 216);" >
+  <nav  class="navbar navbar-expand-lg navbar-light " style="background-color: rgb(182, 164, 199);">
+    <div class="container-fluid">
+          <a class="navbar-brand" style="color: rgb(81, 54, 107);" href="#">ExpenseBook</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link active" style="text-transform: capitalize;" aria-current="page" href="#">Hello, <%= currentuser%></a>
+                <a class="nav-link active" style="text-transform: capitalize; color: rgb(81, 54, 107);" aria-current="page" href="#">Hello, <%= currentuser%></a>
               </li>
               <li class="nav-item dropdown">
-                <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">ExpenseName</a>
+                <a class="nav-link dropdown-toggle" style="color: rgb(81, 54, 107);" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">ExpenseName</a>
                 <ul class="dropdown-menu">
                 <% if(user.length!=0){ %>
                   <% user.forEach(function(val){%>
-                    <li><a href="/profile/<%=val._id %>" onclick="selectexpense(`<%= val._id %>`)" class="radio text-capitalize dropdown-item" type="radio" name="expense" 
+                    <li><a href="/profile/<%=val._id %>" style="color: rgb(81, 54, 107);" onclick="selectexpense(`<%= val._id %>`)" class="radio text-capitalize dropdown-item" type="radio" name="expense" 
                     value="<%= val.expensename %>"><%= val.expensename %></a></li>
                 <% }) %>  
                 <% } else { %>
-                  <li><label class="dropdown-item" for="create-expense"  href="#">Create Now...</label></li>
+                  <li><label class="dropdown-item" for="create-expense" style="color: rgb(81, 54, 107);" href="#">Create Now...</label></li>
                 <% } %>  
                 </ul>
               </li>
@@ -39,7 +39,7 @@
               </li>
             </ul>
             <form action="createexpense" method="POST" class="d-flex">
-                <input class="form-control me-2" id="create-expense" name="expensename" type="search" placeholder="Create New Expense..." aria-label="Search">
+                <input class="form-control me-2" id="create-expense" required name="expensename" type="search" placeholder="Create New Expense..." aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Craete</button>
               </form>
               <a href="/logout"><button class="btn m-lg-1 btn-outline-success" type="submit"><%= username%>,Logout</button></a>

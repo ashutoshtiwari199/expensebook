@@ -9,23 +9,17 @@
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KyZXEAg3QhqLMpG8r+8fhAXLRk2vvoC2f3B09zVXn8CA5QIVfZOJ3BCsw2P0p/We" crossorigin="anonymous">
     <title>ExpenseBook</title>
   </head>
-  <body class="body" >
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+  <body class="body" style="background-color: rgb(208, 200, 216);" >
+    <nav class="navbar navbar-expand-lg " style="background-color: rgb(182, 164, 199);">
         <div class="container-fluid">
-          <a class="navbar-brand" href="#">ExpenseBook</a>
+          <a class="navbar-brand" style="color: rgb(81, 54, 107);" href="#">ExpenseBook</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
           </button>
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="#">Home</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link" href="#">Link</a>
-              </li>
-              <li class="nav-item">
-                <a class="nav-link disabled" href="#" tabindex="-1" aria-disabled="true">Disabled</a>
+                <a class="nav-link active" aria-current="page" style="color: rgb(81, 54, 107);" href="#">Home</a>
               </li>
             </ul>
           </div>
@@ -33,10 +27,10 @@
       </nav> 
       <!-- Modals to login -->
       <!-- Button trigger modal -->
-    <button type="button" class="btn btn-primary position-absolute top-50 start-50 translate-middle" data-bs-toggle="modal" data-bs-target="#loginModal">
+    <button type="button" class="btn position-absolute top-50 start-50 translate-middle" style="background-color: rgb(155, 127, 179);" data-bs-toggle="modal" data-bs-target="#loginModal">
       Login
     </button>
-    <button type="button" style="position: absolute;top: 40%;left: 50%;transform: translate(-50%, -50%);" class="btn btn-primary register-button" data-bs-toggle="modal" data-bs-target="#registerModal">
+    <button type="button" style="position: absolute;top: 40%;left: 50%;transform: translate(-50%, -50%); background-color: rgb(155, 127, 179);" class="btn register-button" data-bs-toggle="modal" data-bs-target="#registerModal">
       Register
     </button>
 
@@ -51,7 +45,7 @@
       <div class="modal-body">
         <form action="login" method="POST">
           <div class="mb-3">
-            <label for="exampleInputEmail1"  class="form-label">UserName</label>
+            <label for="exampleInputEmail1"  class="form-label">Username</label>
             <input type="text" class="form-control" name="username" id="exampleInputEmail1" aria-describedby="emailHelp">
             <div id="emailHelp" class="form-text">We'll share your Everything.</div>
           </div>
@@ -91,7 +85,7 @@
           <div class="mb-3">
             <label for="exampleInputPassword1" class="form-label">Password</label >
             <input oninput="passwordlength()" type="password" name="password" class="form-control" id="inputPassword" required>
-            <span style="font-size: 12px; color: brown; position: absolute;" class="invisible" id="small-password-err-msg">Password length must be 6 digit!!</span>
+            <span style="font-size: 12px; color: brown; position: absolute;" class="invisible" id="small-password-err-msg">Password length must be 6 character!!</span>
           </div>
           <div class="mb-3">
             <label for="exampleInputPassword1" class="form-label">Confirm Password</label>

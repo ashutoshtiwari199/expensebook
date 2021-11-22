@@ -134,8 +134,8 @@ router.get('/profile/:expense', isLoggedIn, function (req, res) {
 
 router.get('/delete/:ele/:expId', function (req, res) {
   var newvalues = { $pull: { "expenseamount": { "txnId": req.params.ele } } }
-  Expense.updateOne({}, newvalues, { multi: true }, function (err, res) {
-    if (err) throw err
+  Expense.updateOne({_id:req.params.expId}, newvalues, { multi: true }, function (err, res) {
+    if (err) console.log(err);
     console.log("deleted")
   })
   res.redirect(`/profile/${req.params.expId}`)
@@ -143,7 +143,7 @@ router.get('/delete/:ele/:expId', function (req, res) {
 
 // *************update transaction route********************//
 
-router.put('/updatetxn/:txnId/:expenseId',(req,res)=>{
+router.post('/updatetxn/:txnId/:expenseId',(req,res)=>{
   const txnId= req.params.txnId;
   const tobeupdate= req.body;
   Expense.findOne({_id: req.params.expenseId}).then(expense=>{

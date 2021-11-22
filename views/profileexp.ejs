@@ -8,8 +8,8 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title><%= currentuser, %> Page</title>
 </head>
-<body>
-    <nav  class="navbar navbar-expand-lg navbar-light bg-light">
+<body style="background-color: rgb(208, 200, 216);">
+    <nav  class="navbar navbar-expand-lg navbar-light " style="background-color: rgb(182, 164, 199);">
         <div class="container-fluid">
           <a class="navbar-brand" href="#">ExpenseBook</a>
           <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
@@ -18,13 +18,13 @@
           <div class="collapse navbar-collapse" id="navbarSupportedContent">
             <ul class="navbar-nav me-auto mb-2 mb-lg-0">
               <li class="nav-item">
-                <a class="nav-link active" style="text-transform: capitalize;" aria-current="page" href="#">Hello, <%= currentuser%></a>
+                <a class="nav-link active" style="text-transform: capitalize; color: rgb(81, 54, 107);" aria-current="page" href="#">Hello, <%= currentuser%></a>
               </li>
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">ExpenseName</a>
                 <ul class="dropdown-menu">
                   <% expensename.forEach(function(val){%>
-                    <li><a href="/profile/<%=val._id %>" onclick="selectexpense(`<%= val._id %>`)" class=" dropdown-item" type="" name="expense" title="kkkk"
+                    <li style="color: rgb(81, 54, 107);" ><a href="/profile/<%=val._id %>" onclick="selectexpense(`<%= val._id %>`)" class=" dropdown-item" type="" name="expense"
                       value="<%= val.expensename %>"><%= val.expensename %></a>
                   </li>
                 <% }) %>
@@ -42,8 +42,8 @@
                 <% if(isAdmin===true){ %>
                 <form action="/adduser" method="POST" id="myForm" class="d-flex">
                     <input class="dd" type="hidden" name="localstorage">
-                  <input class="form-control me-2 " id="username" class="username" name="username" type="search" placeholder="Add Member..." aria-label="Search">
-                  <button class="btn btn-outline-success btn-sm" type="submit">+</button>
+                  <input class="form-control me-2 " id="username" class="username" style="background-color: rgb(223, 214, 232);"  required oninput="" name="username" type="search" placeholder="Add Member..." aria-label="Search">
+                  <button class="btn btn-success btn-sm" type="submit">+</button>
                 </form>
                 <% } else{ %>
                   <h6 style="display: none;"></h6>
@@ -51,23 +51,23 @@
               </li>
             </ul>
             <form action="/createexpense" method="POST" class="d-flex">
-                <input class="form-control me-2 " name="expensename" type="search" placeholder="Create New Expense..." aria-label="Search">
-                <button class="btn btn-outline-success" type="submit">Create</button>
+                <input class="form-control me-2  " name="expensename" req type="search" placeholder="Create New Expense..." aria-label="Search">
+                <button class="btn btn-success" type="submit">Create</button>
               </form>
-              <a href="/logout"><button class="btn m-lg-1 btn-outline-success" type="submit">Logout</button></a>
+              <a href="/logout"><button class="btn m-lg-1 btn-success text-capitalize" type="submit">Logout</button></a>
           </div>
         </div>
       </nav> 
       <table class="table">
         <tbody>
-          <tr class="d-flex justify-content-around">
+          <tr style="color: rgb(81, 54, 107);" class="d-flex justify-content-around">
             <td>Total expense:- <%= total %></td>
           </tr>
           
           <% individualExpense.forEach(value=>{ %>
-            <tr class="d-flex justify-content-around">
-              <td><%= value.spentby %> <%= value.amount%> </td>
-            </tr>
+            <!-- <tr class="d-flex justify-content-around"> -->
+              <p style="width: 100vw;color: rgb(81, 54, 107); background-color: #4541; display: flex; justify-content: space-around;"> <span> <%= value.spentby %></span>:- <span><%= value.amount%></span> </p>
+            <!-- </tr> -->
           <% }) %>
 
         </tbody>
@@ -76,41 +76,82 @@
       
       <form class=""  action="/addtransaction" method="POST">
         <input id="dd" class="dd" type="hidden"  name="localstorage">
-        <input type="text" min="3" class="m-1" name="goodsname" placeholder="GoodsName...">
-        <input type="number" min="0" class="m-1" name="amount" placeholder="₹ ">
-        <input type="submit" class="m-1">
+        <!-- <input type="text" class="form-control" placeholder="First name"> -->
+
+        <input style="background-color: rgb(223, 214, 232); color: rgb(81, 54, 107); border: 1px solid rgb(172, 141, 172);" type="text" min="3" class="m-2 mt-1 mb-1" required name="goodsname" placeholder="GoodsName...">
+        <input style="background-color: rgb(223, 214, 232); color: rgb(81, 54, 107); border: 1px solid rgb(172, 141, 172);" type="number" min="0" class="m-2 mt-1" required name="amount" placeholder="₹ ">
+        <input style="background-color: rgb(223, 214, 232); color: rgb(81, 54, 107); border: 1px solid purple;" type="submit" class="m-1 btn btn-success btn-sm ">
       </form>
   
       <table class="mt-5 table table-striped">
         <thead>
           <tr>
-            <th scope="col">Date</th>
-            <th scope="col">Name</th>
-            <th scope="col">GoodsName</th>
-            <th scope="col">Amount</th>
-            <th scope="col">Modify</th>
+            <th scope="col" style="color: rgb(81, 54, 107);" >Date</th>
+            <th scope="col" style="color: rgb(81, 54, 107);" >Name</th>
+            <th scope="col" style="color: rgb(81, 54, 107);">GoodsName</th>
+            <th scope="col" style="color: rgb(81, 54, 107);">Amount</th>
+            <th scope="col" style="color: rgb(81, 54, 107);">Modify</th>
           </tr>
         </thead>
         <tbody>
 
+          <!-- <span class="badge text-info">New</span> ***************************Updeated badges-->
+
         <% goods.forEach(function(val){ %>
           <tr>
-            <td><%= val.date %></td>
-            <td><%= val.spentby %></td>
-            <td><%= val.goods %></td>
-            <td>₹ <%= (val.amount) %></td>
+            <td style="color: rgb(81, 54, 107);"><%= val.date %> </td>
+            <td style="color: rgb(81, 54, 107); text-transform: capitalize; "><%= val.spentby %></td>
+            <td  style="color: rgb(81, 54, 107);"><%= val.goods %></td>
+            <td  style="color: rgb(81, 54, 107);">₹ <%= (val.amount) %></td>
             <% if(val.spentby===currentuser){ %>
-                <td><a href="/delete/<%= val.txnId%>/<%= expenseid._id%>"><i class="fa fa-trash-alt"></i></a></td>
-                        <% } else {%>
-              <td><i class="fa fa-check-double"></i></td>
+                <td><i  class="fa fa-pen " style="cursor: pointer;color: rgb(142, 83, 197);" data-bs-toggle="modal" id="deletevalue" data-bs-target="#loginModal<%= val.txnId%>"> 
+                </i>
+                <div class="modal fade" id="loginModal<%= val.txnId%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                  <div class="modal-dialog modal-dialog-centered">
+                  <div class="modal-content">
+                    <div class="modal-header">
+                      <h5 class="modal-title " id="exampleModalLabel">Update.</h5>
+
+                      <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                    </div>
+                    <div class="modal-body">
+                      <form action="/updatetxn/<%= val.txnId%>/<%= expenseid._id%>" method="POST">
+                        <div class="mb-3">
+                          <input type="hidden" class="form-control" name="spentby" value="<%=val.spentby%>" id="" aria-describedby="emailHelp">
+                          <input type="hidden" class="form-control" name="txnId" value="<%=val.txnId%>" id="" aria-describedby="emailHelp">
+                          <input type="hidden" class="form-control" name="date" value="<%=val.date%>" id="" aria-describedby="emailHelp">
+                          <input type="hidden" class="form-control" name="time" value="<%=val.time%>" id="" aria-describedby="emailHelp">
+                          <input type="hidden" class="form-control" name="updated" value=["true","<%= val.amount %>"] id="" aria-describedby="emailHelp">
+                          <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text" id="basic-addon1">Goods</span>
+                            </div>
+                            <input type="text" class="form-control text-muted" required name="goods" id="" value="<%= val.goods %>" aria-describedby="basic-addon1">
+                          </div>
+                          <div class="input-group mb-3">
+                            <div class="input-group-prepend">
+                              <span class="input-group-text" id="basic-addon1">Amount</span>
+                            </div>
+                            <input type="number" class="form-control text-muted" required name="amount" id="" value="<%= val.amount %>" aria-describedby="emailHelp">        
+                          </div>
+                          <a href="/delete/<%= val.txnId%>/<%= expenseid._id%>" type="submit" id="tobedeleted" class="btn btn-danger ">Delete</a>
+                          <button type="submit" class="btn btn-success ">Update</button>
+                      </form>
+                      </div>
+                  </div>
+                  </div>
+                  </div>
+                </td>
+               <% } else {%>
+              <td><i class="fa fa-check-double " style="cursor: pointer; color: rgba(119, 102, 133, 0.774);"></i></td>
             <% } %>
           </tr>
           <% }) %>
         </tbody>
       </table>
+      
 
       <!-- update form modal -->
-
       <div class="modal fade" id="updatetxn" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog modal-dialog-centered">
           <div class="modal-content">
@@ -121,8 +162,12 @@
             <div class="modal-body">
               <form action="login" method="POST">
                 <div class="mb-3">
-                  <label for="exampleInputEmail1"  class="form-label">UserName</label>
-                  <input type="text" class="form-control" name="username" id="exampleInputEmail1" aria-describedby="emailHelp">
+                  <input type="hidden" class="form-control" name="spentby" aria-describedby="emailHelp">
+                  <input type="hidden" class="form-control" name="txnId" aria-describedby="emailHelp">
+                  <input type="hidden" class="form-control" name="date" aria-describedby="emailHelp">
+                  <input type="hidden" class="form-control" name="update" aria-describedby="emailHelp">
+                  <input type="text" class="form-control" name="goods" value="" aria-describedby="emailHelp">
+                  <input type="text" class="form-control" name="amount" aria-describedby="emailHelp">
                   <div id="emailHelp" class="form-text">We'll share your Everything.</div>
                 </div>
                 <div class="mb-3">
@@ -141,8 +186,7 @@
 
         document.querySelector('.dd').value = localStorage.getItem("expense")
         document.querySelector('#dd').value = localStorage.getItem("expense")
-        // const obj= document.querySelector('#goods').value;
-
+       
         
         function selectexpense(val) {
           document.querySelector('.dd').value = val; 
@@ -151,18 +195,33 @@
         }
         
 
-        console.log(arr);
         function myfunction(){
             if(localStorage.getItem("expense")!= null){
                 location.replace(`http://localhost:3000/profile/${localStorage.getItem("expense")}`);
             }
         }
 
+        function GetFormattedDate() {
+  var todayTime = new Date();
+  var month = (todayTime.getMonth() + 1);
+  var day = (todayTime.getDate());
+  var year = (todayTime.getFullYear());
+  return day + "/" + month + "/" + year;
+}
+
+
+// ******** Time Function*************//
+      function GetFormattedTime() {
+  var datetime = new Date();
+  var hour = datetime.getHours();
+  var minute = datetime.getMinutes();
+  var second = datetime.getSeconds();
+    return    hour +":"+ minute + ":" + second;
+}
 
 
             </script>
             <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
-
 
 </body>
 </html>
