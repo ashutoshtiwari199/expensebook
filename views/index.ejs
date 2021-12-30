@@ -47,7 +47,7 @@
           <div class="mb-3">
             <label for="exampleInputEmail1"  class="form-label">Username</label>
             <input type="text" class="form-control" name="username" id="exampleInputEmail1" aria-describedby="emailHelp">
-            <div id="emailHelp" class="form-text">We'll share your Everything.</div>
+            <!-- <div id="emailHelp" class="form-text">We never share you.</div> -->
           </div>
           <div class="mb-3">
             <label for="exampleInputPassword1" class="form-label">Password</label>
@@ -119,7 +119,7 @@ function validatesamepassword(){
     RegisterButton.classList.remove("disabled")
   }
 }
-
+console.log(window);
 function passwordlength(){
   if(password.value.length<6){
     lengtherrmsg.classList.remove("invisible")

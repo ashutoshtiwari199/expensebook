@@ -9,7 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" integrity="sha512-1ycn6IcaQQ40/MKBW2W4Rhis/DbILU74C1vSrLJxCq57o941Ym01SwNsOMqvEBFlcgUa6xLiPY/NS5R+E6ztJQ==" crossorigin="anonymous" referrerpolicy="no-referrer" />
     <title>User's Page</title>
 </head>
-<body style="background-color: rgb(208, 200, 216);" >
+<body style="background-color: rgb(208, 200, 216);" onload="getOlderExpense()">
   <nav  class="navbar navbar-expand-lg navbar-light " style="background-color: rgb(182, 164, 199);">
     <div class="container-fluid">
           <a class="navbar-brand" style="color: rgb(81, 54, 107);" href="#">ExpenseBook</a>
@@ -38,14 +38,22 @@
               <li class="nav-item">
               </li>
             </ul>
-            <form action="createexpense" method="POST" class="d-flex">
-                <input class="form-control me-2" id="create-expense" required name="expensename" type="search" placeholder="Create New Expense..." aria-label="Search">
+            <!-- <form action="createexpense" method="POST" class="d-flex">
+                <input class="form-control me-2" id="create-expense" required name="expensename" type="search" placeholder="Create New Expens3e..." aria-label="Search">
                 <button class="btn btn-outline-success" type="submit">Craete</button>
-              </form>
+              </form> -->
               <a href="/logout"><button class="btn m-lg-1 btn-outline-success" type="submit"><%= username%>,Logout</button></a>
           </div>
         </div>
       </nav> 
+
+
+      <form action="createexpense" method="POST" class=" position-absolute top-50 start-50 translate-middle " style="display: flex; flex-direction: column;" >
+        <input class="form-control me-2" id="create-expense" required name="expensename" type="search" placeholder="Create New Expense..." aria-label="Search">
+        <button class="btn btn-outline-success m-2" type="submit">Create</button>
+      </form>
+
+
       <!-- <img height="20%" width="20" src="../public/images/indexpic.jpg" alt="picture"> -->
        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.0/dist/js/bootstrap.bundle.min.js" integrity="sha384-U1DAWAznBHeqEIlVSCgzq+c9gqGAJn5c/t99JyeKa9xxaYpSvHU5awsuZVVFIhvj" crossorigin="anonymous"></script>
       <script src="./scrip.js"></script>
@@ -57,13 +65,12 @@
             console.log("from Localstorage  " + localStorage.getItem("expense"))
         }
         
-        function myfunction(){
+        function getOlderExpense(){
             if(localStorage.getItem("expense")!= null){
-                location.replace(`http://localhost:3000/profile/${localStorage.getItem("expense")}`);
+                location.replace( `${window.location.href}/${localStorage.getItem("expense")}`);
             }
         }
-        
-            </script>
+      </script>
         
 
 </body>
