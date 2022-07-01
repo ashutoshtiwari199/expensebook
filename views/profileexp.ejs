@@ -23,11 +23,14 @@
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">ExpenseName</a>
                 <ul class="dropdown-menu">
-                  <% expensename.forEach(function(val){%>
-                    <li style="color: rgb(81, 54, 107);" ><a href="/profile/<%=val._id %>" onclick="selectexpense(`<%= val._id %>`)" class=" dropdown-item" type="" name="expense"
-                      value="<%= val.expensename %>"><%= val.expensename %></a>
-                  </li>
+                  <% expensename.forEach(function(val, index){%>
+                    <li style="color: rgb(81, 54, 107);" class="d-flex" ><a href="/profile/<%=val._id %>" onclick="selectexpense(`<%= val._id %>`)" class=" dropdown-item" type="" name="expense"
+                      value="<%= val.expensename %>"><%= val.expensename %> </a> <i class="fa fa-trash m-2" onclick="deleteClusterSelect(`<%= val._id %>`,`<%= index %>`)"  style="font-size: 1rem; color: rgb(190, 59, 59); cursor: pointer;"
+                       aria-hidden="true"
+                       data-bs-toggle="modal" id="deletevalue" data-bs-target="#loginModal<%= val.txnId %>"></i>
+                  </li>                  
                 <% }) %>
+                
   
                 </ul>
               </li>
@@ -104,14 +107,13 @@
             <td  style="color: rgb(81, 54, 107);"><%= val.goods %></td>
             <td  style="color: rgb(81, 54, 107);">₹ <%= (val.amount) %></td>
             <% if(val.spentby===currentuser){ %>
-                <td><i  class="fa fa-pen " style="cursor: pointer;color: rgb(142, 83, 197);" data-bs-toggle="modal" id="deletevalue" data-bs-target="#loginModal<%= val.txnId%>"> 
+                <td><i  class="fa fa-pen " style="cursor: pointer;color: rgb(142, 83, 197);" data-bs-toggle="modal" data-bs-target="#loginModal"> 
                 </i>
                 <div class="modal fade" id="loginModal<%= val.txnId%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                   <div class="modal-dialog modal-dialog-centered">
                   <div class="modal-content">
                     <div class="modal-header">
                       <h5 class="modal-title " id="exampleModalLabel">Update.</h5>
-
                       <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                     </div>
                     <div class="modal-body">
@@ -180,6 +182,23 @@
           </div>
         </div>
       </div>
+
+  
+  <!-- Modal Delete Cluster -->
+  <div class="modal fade " id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+    <div class="modal-dialog modal-dialog-centered" >
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Are you sure to delete this account!!!</h5>
+          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+        </div>
+        <div class="modal-body">
+          <label for="exampleInputEmail1"  class="form-label mb-3">Other contributors still able to see all transaction.</label>
+            <a type="submit" class="btn btn-outline-danger container-fluid" id="cluterDeleteButton" >Delete</a>
+        </div>
+      </div>
+    </div>
+  </div>
       
 
       <script>
@@ -209,6 +228,16 @@
   return day + "/" + month + "/" + year;
 }
 
+
+const deleteClusterSelect=(clusterId, index)=>{
+  console.log("clusterdelete", index)
+  localStorage.removeItem("expense")
+  let a= document.getElementById('cluterDeleteButton').setAttribute("href", `/deletecluster/${clusterId}/${index}`);
+  console.log("clusterdelete", a)
+  
+}
+// const onDeleteCluster
+// fetch('/deletecluster'+ new URLSearchParams(clusterId))
 
 // ******** Time Function*************//
       function GetFormattedTime() {

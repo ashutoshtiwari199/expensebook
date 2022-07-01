@@ -83,7 +83,7 @@ router.post('/createexpense', isLoggedIn, (req, res) => {
       }).then((created) => {
         found.expensename.push(created)
         found.save().then(function () {
-          res.send(created);
+          // res.send(created);
         })
       }).catch((err) => {
         res.send(err)
@@ -114,9 +114,9 @@ router.get('/profile/:expense', isLoggedIn, function (req, res) {
     Expense.findOne({ _id: req.params.expense }).then(expensefound => {
       User.findOne({ username: req.session.passport.user }).then(founduser => {
         res.render('profileexp', {
-          goods: expensefound.expenseamount,
+          goods: expensefound?.expenseamount,
           expenseid: expensefound,
-          currentselectedexpense:expensefound.expensename,
+          currentselectedexpense:expensefound?.expensename,
           isAdmin: isadmin(expensefound.adminusername, req.session.passport.user),
           expensename: founduser.expensename,
           currentuser: req.session.passport.user,
@@ -180,7 +180,29 @@ router.post('/addtransaction', isLoggedIn, function (req, res) {
 
 
 
+router.get('/deletecluster/:clusterId/:index', isLoggedIn, function(req,res){
+  // console.log("restOfExpense",req.params.clusterId)
+  User.findOne({username: req.session.passport.user}).then(userfound=>{
+    const restOfExpense= deleteExpense(userfound.expensename, req.params.index)
+    console.log("rest",restOfExpense)
+    User.updateOne({_id: userfound._id },
+      {$set : {"expensename" : restOfExpense} } ,
+      (err,result)=>{
+        if(err) res.json(err);
+        console.log("resulttttttttt",result)
+        res.redirect(`/profile`)
+    })
+  })
+})
 
+
+const deleteExpense=(expenseArr, indexNo)=>{
+  console.log(expenseArr)
+  let a= expenseArr.splice(indexNo,1)
+  return expenseArr;
+  // console.log('================',a, expenseArr)
+
+}
 
 // *********Login Route with passport *********
 

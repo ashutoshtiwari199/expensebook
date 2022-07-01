@@ -24,7 +24,7 @@
               <li class="nav-item dropdown">
                 <a class="nav-link dropdown-toggle" style="color: rgb(81, 54, 107);" data-bs-toggle="dropdown" href="#" role="button" aria-expanded="false">ExpenseName</a>
                 <ul class="dropdown-menu">
-                <% if(user.length!=0){ %>
+                <% if(user && user.length!=0){ %>
                   <% user.forEach(function(val){%>
                     <li><a href="/profile/<%=val._id %>" style="color: rgb(81, 54, 107);" onclick="selectexpense(`<%= val._id %>`)" class="radio text-capitalize dropdown-item" type="radio" name="expense" 
                     value="<%= val.expensename %>"><%= val.expensename %></a></li>
