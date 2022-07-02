@@ -27,7 +27,7 @@
                     <li style="color: rgb(81, 54, 107);" class="d-flex" ><a href="/profile/<%=val._id %>" onclick="selectexpense(`<%= val._id %>`)" class=" dropdown-item" type="" name="expense"
                       value="<%= val.expensename %>"><%= val.expensename %> </a> <i class="fa fa-trash m-2" onclick="deleteClusterSelect(`<%= val._id %>`,`<%= index %>`)"  style="font-size: 1rem; color: rgb(190, 59, 59); cursor: pointer;"
                        aria-hidden="true"
-                       data-bs-toggle="modal" id="deletevalue" data-bs-target="#loginModal<%= val.txnId %>"></i>
+                       data-bs-toggle="modal" id="deletevalue" data-bs-target="#deleteClusterModal"></i>
                   </li>                  
                 <% }) %>
                 
@@ -107,8 +107,8 @@
             <td  style="color: rgb(81, 54, 107);"><%= val.goods %></td>
             <td  style="color: rgb(81, 54, 107);">₹ <%= (val.amount) %></td>
             <% if(val.spentby===currentuser){ %>
-                <td><i  class="fa fa-pen " style="cursor: pointer;color: rgb(142, 83, 197);" data-bs-toggle="modal" data-bs-target="#loginModal"> 
-                </i>
+              <td><i  class="fa fa-pen " style="cursor: pointer;color: rgb(142, 83, 197);" data-bs-toggle="modal" id="deletevalue" data-bs-target="#loginModal<%= val.txnId%>"> 
+              </i>
                 <div class="modal fade" id="loginModal<%= val.txnId%>" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
                   <div class="modal-dialog modal-dialog-centered">
                   <div class="modal-content">
@@ -185,7 +185,7 @@
 
   
   <!-- Modal Delete Cluster -->
-  <div class="modal fade " id="loginModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+  <div class="modal fade " id="deleteClusterModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog modal-dialog-centered" >
       <div class="modal-content">
         <div class="modal-header">
